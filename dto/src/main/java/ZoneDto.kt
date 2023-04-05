@@ -5,6 +5,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ZoneDto(
+    val id: String,
     val code: Int,
     val title: String,
     val coordinates: List<Coordinates>

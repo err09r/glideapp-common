@@ -3,10 +3,7 @@ package com.apsl.glideapp.common.dto
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class UserDto(
-    val id: String,
+data class RegisterRequest(
     val username: String,
-    val firstName: String,
-    val lastName: String
+    val password: String
 )
-

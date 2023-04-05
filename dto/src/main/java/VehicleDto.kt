@@ -6,6 +6,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class VehicleDto(
+    val id: String,
     val code: Int,
     val batteryCharge: Int,
     val status: VehicleStatus,
