@@ -3,6 +3,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class CoordinatesBounds(
-    val northeastBound: Coordinates,
-    val southwestBound: Coordinates
+    val southwest: Coordinates,
+    val northeast: Coordinates
 )
