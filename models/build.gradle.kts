@@ -1,3 +1,9 @@
+plugins {
+    id("com.apsl.glideapp.common.kotlin-publish")
+    alias(libs.plugins.kotlin.serialization)
+}
+
 dependencies {
-    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
+    implementation(libs.kotlin.serialization.json)
+    implementation(libs.kotlin.datetime)
 }

@@ -3,6 +3,7 @@
 pluginManagement {
     repositories {
         mavenCentral()
+        gradlePluginPortal()
     }
 }
 dependencyResolutionManagement {
@@ -13,6 +14,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "glideapp-common"
-include("dto")
-include("util")
-include("models")
+include("dto", "models", "util")

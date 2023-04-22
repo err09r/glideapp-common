@@ -1,52 +1,17 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 
 plugins {
-    val kotlinVersion = "1.8.20"
-    kotlin("jvm") version kotlinVersion
-    kotlin("plugin.serialization") version kotlinVersion apply false
-    `maven-publish`
+    alias(libs.plugins.gradle.versions)
 }
 
-allprojects {
-    group = "com.apsl.glideapp.common"
-    version = "0.0.8"
-}
-
-subprojects {
-    apply {
-        plugin("java-library")
-        plugin("maven-publish")
-        plugin("org.jetbrains.kotlin.jvm")
-        plugin("org.jetbrains.kotlin.plugin.serialization")
-    }
-
-    dependencies {
-        implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
-    }
-
-    java {
-        withSourcesJar()
-        withJavadocJar()
-
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-
-    tasks.withType<KotlinCompile> {
-        kotlinOptions {
-            jvmTarget = "1.8"
+tasks.named<DependencyUpdatesTask>("dependencyUpdates").configure {
+    rejectVersionIf {
+        arrayOf("alpha", "beta", "rc", "dev").any {
+            candidate.version.contains(it, ignoreCase = true)
         }
     }
-
-    publishing {
-        publications {
-            create<MavenPublication>("maven") {
-                artifactId = project.name
-                groupId = project.group.toString()
-                version = project.version.toString()
-
-                from(components["java"])
-            }
-        }
-    }
+    checkForGradleUpdate = true
+    outputDir = "$buildDir/dependencyUpdates"
+    outputFormatter = Config.DependencyUpdates.outputFormatter
+    reportfileName = Config.DependencyUpdates.reportfileName
 }
