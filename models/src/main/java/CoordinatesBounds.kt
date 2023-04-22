@@ -1,4 +1,5 @@
-import com.apsl.glideapp.common.models.Coordinates
+package com.apsl.glideapp.common.models
+
 import kotlinx.serialization.Serializable
 
 @Serializable
