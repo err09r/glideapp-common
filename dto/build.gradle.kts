@@ -6,4 +6,5 @@ plugins {
 dependencies {
     api(project(":models"))
     implementation(libs.kotlin.serialization.json)
+    implementation(libs.kotlin.datetime)
 }
