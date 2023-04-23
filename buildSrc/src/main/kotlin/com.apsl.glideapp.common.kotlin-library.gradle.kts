@@ -19,6 +19,5 @@ java {
 tasks.withType<KotlinCompile>().configureEach {
     kotlinOptions {
         jvmTarget = Config.jvmTarget
-        freeCompilerArgs += listOf("-Xlint:unusedCode")
     }
 }
