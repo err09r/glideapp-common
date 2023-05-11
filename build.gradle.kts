@@ -1,7 +1,7 @@
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 
 plugins {
-    alias(libs.plugins.gradle.versions)
+    alias(libs.plugins.gradleVersions)
 }
 
 tasks.named<DependencyUpdatesTask>("dependencyUpdates").configure {
