@@ -15,7 +15,7 @@ sealed interface RideAction {
     ) : RideAction
 
     @Serializable
-    data class UpdateRoute(val coordinates: Coordinates) : RideAction
+    data class UpdateRoute(val rideId: String, val coordinates: Coordinates) : RideAction
 
     @Serializable
     data class Finish(
