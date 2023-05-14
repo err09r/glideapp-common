@@ -10,7 +10,7 @@ sealed interface RideAction {
     data class Start(
         val vehicleId: String,
         val coordinates: Coordinates,
-        val address: String,
+        val address: String?,
         val dateTime: LocalDateTime
     ) : RideAction
 
@@ -22,7 +22,7 @@ sealed interface RideAction {
         val rideId: String,
         val vehicleId: String,
         val coordinates: Coordinates,
-        val address: String,
+        val address: String?,
         val dateTime: LocalDateTime
     ) : RideAction
 }
