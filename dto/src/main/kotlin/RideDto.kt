@@ -7,6 +7,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class RideDto(
     val id: String,
+    val key: Int?,
     val startAddress: String?,
     val finishAddress: String?,
     val startDateTime: LocalDateTime,
