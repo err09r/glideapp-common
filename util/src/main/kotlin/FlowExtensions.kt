@@ -2,6 +2,7 @@ package com.apsl.glideapp.common.util
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.map
 
 fun <T> Flow<T>.asResult(): Flow<Result<T>> {
@@ -9,3 +10,6 @@ fun <T> Flow<T>.asResult(): Flow<Result<T>> {
         .map { Result.success(it) }
         .catch { emit(Result.failure(it)) }
 }
+
+suspend fun Flow<*>.collectLatest(): Unit = collectLatest {}
+
