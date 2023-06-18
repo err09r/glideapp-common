@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class TransactionRequest(
     val type: TransactionType,
-    val amount: Double
+    val amount: Double?
 )
