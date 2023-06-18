@@ -7,5 +7,5 @@ import kotlinx.serialization.Serializable
 data class TransactionRequest(
     val type: TransactionType,
     val amount: Double?,
-    val voucherCode: String?
+    val voucherCode: String? = null
 )
