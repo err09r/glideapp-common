@@ -10,6 +10,16 @@ object Geometry {
 
     private const val EARTH_RADIUS_METERS = 6_371_000
 
+    fun isInsidePolygon(polygon: List<Coordinates>, coordinates: Coordinates): Boolean {
+        return isInsidePolygon(
+            numberOfVertices = polygon.size,
+            vertX = polygon.map(Coordinates::longitude),
+            vertY = polygon.map(Coordinates::latitude),
+            pointX = coordinates.longitude,
+            pointY = coordinates.latitude
+        )
+    }
+
     /**
      * Checks whether the point is inside the polygon.
      *
@@ -20,7 +30,7 @@ object Geometry {
      * @param pointY the y-coordinate of the point for research.
      * @see <a href="https://wrf.ecse.rpi.edu/Research/Short_Notes/pnpoly.html">PNPOLY - Point Inclusion in Polygon Test</a>
      */
-    fun isInsideOfPolygon(
+    fun isInsidePolygon(
         numberOfVertices: Int,
         vertX: List<Double>,
         vertY: List<Double>,
@@ -78,3 +88,5 @@ object Geometry {
         return distance
     }
 }
+
+fun Coordinates.isInsidePolygon(polygon: List<Coordinates>) = Geometry.isInsidePolygon(polygon, this)
