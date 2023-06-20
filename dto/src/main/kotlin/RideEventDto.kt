@@ -14,7 +14,7 @@ sealed interface RideEventDto {
     data class RouteUpdated(val currentRoute: List<Coordinates>) : RideEventDto
 
     @Serializable
-    sealed class Error(val message: String?) {
+    sealed class Error(val message: String?) : RideEventDto {
 
         @Serializable
         object UserInsideNoParkingZone : Error("User is inside no-parking zone")
