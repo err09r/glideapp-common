@@ -13,6 +13,9 @@ sealed interface RideEventDto {
     data class Started(val rideId: String, val dateTime: LocalDateTime) : RideEventDto
 
     @Serializable
+    data class Restored(val rideId: String, val dateTime: LocalDateTime) : RideEventDto
+
+    @Serializable
     data class RouteUpdated(val currentRoute: List<Coordinates>) : RideEventDto
 
     @Serializable
