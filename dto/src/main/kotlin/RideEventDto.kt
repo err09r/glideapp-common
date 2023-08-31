@@ -1,3 +1,5 @@
+@file:Suppress("SameParameterValue")
+
 package com.apsl.glideapp.common.dto
 
 import com.apsl.glideapp.common.models.Coordinates
@@ -17,9 +19,9 @@ sealed interface RideEventDto {
     sealed class Error(val message: String?) : RideEventDto {
 
         @Serializable
-        object UserInsideNoParkingZone : Error("User is inside no-parking zone")
+        data object UserInsideNoParkingZone : Error("User is inside no-parking zone")
     }
 
     @Serializable
-    object Finished : RideEventDto
+    data object Finished : RideEventDto
 }
