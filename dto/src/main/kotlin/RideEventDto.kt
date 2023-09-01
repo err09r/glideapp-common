@@ -27,4 +27,7 @@ sealed interface RideEventDto {
 
     @Serializable
     data object Finished : RideEventDto
+
+    @Serializable
+    data class SessionCancelled(val message: String? = null) : RideEventDto
 }
