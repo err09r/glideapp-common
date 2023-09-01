@@ -7,6 +7,9 @@ import kotlinx.serialization.Serializable
 sealed interface RideAction {
 
     @Serializable
+    data object RequestCurrentState : RideAction
+
+    @Serializable
     data class Start(
         val vehicleId: String,
         val coordinates: Coordinates,
