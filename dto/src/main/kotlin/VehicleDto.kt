@@ -12,5 +12,7 @@ data class VehicleDto(
     val batteryCharge: Int,
     val type: VehicleType,
     val status: VehicleStatus,
-    val coordinates: Coordinates
+    val coordinates: Coordinates,
+    val unlockingFee: Double,
+    val farePerMinute: Double
 )
