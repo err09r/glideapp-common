@@ -23,7 +23,6 @@ sealed interface RideAction {
     @Serializable
     data class Finish(
         val rideId: String,
-        val vehicleId: String,
         val coordinates: Coordinates,
         val address: String?,
         val dateTime: LocalDateTime
