@@ -1,4 +1,4 @@
-package com.apsl.glideapp.core.domain.home
+package com.apsl.glideapp.common.models
 
 import kotlinx.serialization.Serializable
 

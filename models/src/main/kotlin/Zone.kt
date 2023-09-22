@@ -1,7 +1,5 @@
-package com.apsl.glideapp.core.domain.home
+package com.apsl.glideapp.common.models
 
-import com.apsl.glideapp.common.models.Coordinates
-import com.apsl.glideapp.common.models.ZoneType
 import kotlinx.serialization.Serializable
 
 @Serializable
