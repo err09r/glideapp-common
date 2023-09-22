@@ -18,6 +18,6 @@ java {
 
 tasks.withType<KotlinCompile>().configureEach {
     kotlinOptions {
-        jvmTarget = Config.jvmTarget
+        jvmTarget = Config.javaVersion.toString()
     }
 }
