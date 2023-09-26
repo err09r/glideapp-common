@@ -26,6 +26,8 @@ class CoordinatesBounds {
     operator fun component1(): Coordinates = this.southwest
     operator fun component2(): Coordinates = this.northeast
 
+    fun asPair(): Pair<Coordinates, Coordinates> = component1() to component2()
+
     val center: Coordinates
         get() {
             val swLat = this.southwest.latitude
@@ -47,10 +49,10 @@ class CoordinatesBounds {
         val pointLat = point.latitude
         return this.southwest.latitude <= pointLat
                 && pointLat <= this.northeast.latitude
-                && this.isBetween(point.longitude)
+                && isValueInRange(point.longitude)
     }
 
-    private fun isBetween(longitude: Double): Boolean {
+    private fun isValueInRange(longitude: Double): Boolean {
         val swLong = this.southwest.longitude
         val neLong = this.northeast.longitude
         return if (swLong <= neLong) {

@@ -4,7 +4,7 @@ import org.gradle.api.JavaVersion
 
 object Config {
     const val group = "com.apsl.glideapp.common"
-    const val version = "0.1.3"
+    const val version = "0.1.4"
 
     val javaVersion = JavaVersion.VERSION_1_8
 

@@ -4,6 +4,7 @@ plugins {
 }
 
 dependencies {
+    implementation(project(":util"))
     implementation(libs.kotlinx.datetime)
     implementation(libs.kotlinx.serialization.json)
 }

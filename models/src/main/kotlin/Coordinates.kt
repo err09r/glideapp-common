@@ -24,6 +24,8 @@ class Coordinates {
     operator fun component1(): Double = latitude
     operator fun component2(): Double = longitude
 
+    fun asPair(): Pair<Double, Double> = component1() to component2()
+
     override fun equals(other: Any?): Boolean {
         if (this === other) {
             return true
@@ -48,3 +50,5 @@ class Coordinates {
         return Coordinates(latitude = latitude, longitude = longitude)
     }
 }
+
+fun List<Coordinates>.asPairs(): Array<Pair<Double, Double>> = this.map(Coordinates::asPair).toTypedArray()

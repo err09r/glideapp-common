@@ -2,7 +2,6 @@
 
 package com.apsl.glideapp.common.util
 
-import com.apsl.glideapp.common.models.Coordinates
 import kotlin.math.asin
 import kotlin.math.cos
 import kotlin.math.sin
@@ -12,38 +11,27 @@ object Geometry {
 
     private const val EARTH_RADIUS_METERS = 6_371_000
 
-    fun isInsidePolygon(polygon: List<Coordinates>, coordinates: Coordinates): Boolean {
-        return isInsidePolygon(
-            numberOfVertices = polygon.size,
-            vertX = polygon.map(Coordinates::longitude),
-            vertY = polygon.map(Coordinates::latitude),
-            pointX = coordinates.longitude,
-            pointY = coordinates.latitude
-        )
-    }
-
     /**
      * Checks whether the point is inside the polygon.
      *
-     * @param numberOfVertices number of polygon's vertices.
-     * @param vertX list containing the x-coordinates of the polygon's vertices.
-     * @param vertY list containing the y-coordinates of the polygon's vertices.
-     * @param pointX the x-coordinate of the point for research.
-     * @param pointY the y-coordinate of the point for research.
+     * @param vertices polygon vertices.
+     * @param point point for research.
      * @see <a href="https://wrf.ecse.rpi.edu/Research/Short_Notes/pnpoly.html">PNPOLY - Point Inclusion in Polygon Test</a>
      */
     fun isInsidePolygon(
-        numberOfVertices: Int,
-        vertX: List<Double>,
-        vertY: List<Double>,
-        pointX: Double,
-        pointY: Double
+        vararg vertices: Pair<Double, Double>,
+        point: Pair<Double, Double>
     ): Boolean {
+        val (pointX, pointY) = point
+        val numberOfVertices = vertices.size
         var isInside = false
         var i = 0
         var j = numberOfVertices - 1
         while (i < numberOfVertices) {
-            if (vertY[i] > pointY != vertY[j] > pointY && pointX < (vertX[j] - vertX[i]) * (pointY - vertY[i]) / (vertY[j] - vertY[i]) + vertX[i]) {
+            val (vertX, vertY) = vertices[i]
+            val (nextVertX, nextVertY) = vertices[j]
+
+            if (vertY > pointY != nextVertY > pointY && pointX < (nextVertX - vertX) * (pointY - vertY) / (nextVertY - vertY) + vertX) {
                 isInside = !isInside
             }
             j = i++
@@ -52,27 +40,29 @@ object Geometry {
     }
 
     /**
-     * Calculates the total distance of ride route in meters.
+     * Calculates the total distance of latitude-longitude polyline in meters.
      *
-     * @param route list of [Coordinates] describing ride route.
+     * @param polyline latitude-longitude pairs describing a polyline.
      * @see <a href="https://en.wikipedia.org/wiki/Haversine_formula">Haversine formula</a>
      * @see <a href="https://community.esri.com/t5/coordinate-reference-systems-blog/distance-on-a-sphere-the-haversine-formula/ba-p/902128">Distance on a sphere: The Haversine Formula</a>
-     * @return distance in meters
+     * @return distance in meters.
      */
-    fun calculateDistance(vararg route: Coordinates): Double {
+    fun calculateDistance(vararg polyline: Pair<Double, Double>): Double {
         var distance = 0.0
 
-        if (route.size < 2) {
+        if (polyline.size < 2) {
             return distance
         }
 
-        for (index in route.indices) {
+        for (index in polyline.indices) {
+            val (latitude, longitude) = polyline[index]
             val nextIndex = index + 1
-            if (nextIndex <= route.lastIndex) {
-                val lat1 = Math.toRadians(route[index].latitude)
-                val long1 = Math.toRadians(route[index].longitude)
-                val lat2 = Math.toRadians(route[nextIndex].latitude)
-                val long2 = Math.toRadians(route[nextIndex].longitude)
+            if (nextIndex <= polyline.lastIndex) {
+                val (nextLatitude, nextLongitude) = polyline[nextIndex]
+                val lat1 = Math.toRadians(latitude)
+                val long1 = Math.toRadians(longitude)
+                val lat2 = Math.toRadians(nextLatitude)
+                val long2 = Math.toRadians(nextLongitude)
 
                 distance += 2 * EARTH_RADIUS_METERS *
                         asin(
