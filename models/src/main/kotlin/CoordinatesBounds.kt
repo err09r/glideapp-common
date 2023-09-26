@@ -82,3 +82,18 @@ class CoordinatesBounds {
         return CoordinatesBounds(southwest = southwest, northeast = northeast)
     }
 }
+
+val CoordinatesBounds.Companion.Empty
+    get() = CoordinatesBounds(southwest = Coordinates(0.0, 0.0), northeast = Coordinates(0.0, 0.0))
+
+fun List<Coordinates>.toCoordinatesBounds(): CoordinatesBounds {
+    val topmostLatitude = this.minOf { it.latitude }
+    val bottommostLatitude = this.maxOf { it.latitude }
+    val leftmostLongitude = this.minOf { it.longitude }
+    val rightmostLongitude = this.maxOf { it.longitude }
+
+    val southwest = Coordinates(latitude = bottommostLatitude, longitude = leftmostLongitude)
+    val northeast = Coordinates(latitude = topmostLatitude, longitude = rightmostLongitude)
+
+    return CoordinatesBounds(southwest = southwest, northeast = northeast)
+}
