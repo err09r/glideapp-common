@@ -1,3 +1,5 @@
+@file:Suppress("Unused", "MemberVisibilityCanBePrivate")
+
 package com.apsl.glideapp.common.util
 
 import com.apsl.glideapp.common.models.Coordinates
@@ -88,5 +90,3 @@ object Geometry {
         return distance
     }
 }
-
-fun Coordinates.isInsidePolygon(polygon: List<Coordinates>) = Geometry.isInsidePolygon(polygon, this)
