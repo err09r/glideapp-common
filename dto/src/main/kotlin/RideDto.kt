@@ -1,6 +1,6 @@
 package com.apsl.glideapp.common.dto
 
-import com.apsl.glideapp.common.models.Coordinates
+import com.apsl.glideapp.common.models.Route
 import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.Serializable
 
@@ -12,7 +12,5 @@ data class RideDto(
     val finishAddress: String?,
     val startDateTime: LocalDateTime,
     val finishDateTime: LocalDateTime,
-    val route: List<Coordinates>,
-    val distance: Double,
-    val averageSpeed: Double
+    val route: Route
 )

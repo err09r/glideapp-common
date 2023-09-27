@@ -1,6 +1,6 @@
 package com.apsl.glideapp.common.dto
 
-import com.apsl.glideapp.common.models.Coordinates
+import com.apsl.glideapp.common.models.ZoneBorder
 import com.apsl.glideapp.common.models.ZoneType
 import kotlinx.serialization.Serializable
 
@@ -10,5 +10,5 @@ data class ZoneDto(
     val code: Int,
     val title: String,
     val type: ZoneType,
-    val coordinates: List<Coordinates>
+    val border: ZoneBorder
 )
