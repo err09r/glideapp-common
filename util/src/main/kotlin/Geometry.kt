@@ -40,17 +40,6 @@ object Geometry {
     }
 
     /**
-     * Calculates the total distance between two latitude-longitude points in meters.
-     *
-     * @see <a href="https://en.wikipedia.org/wiki/Haversine_formula">Haversine formula</a>
-     * @see <a href="https://community.esri.com/t5/coordinate-reference-systems-blog/distance-on-a-sphere-the-haversine-formula/ba-p/902128">Distance on a sphere: The Haversine Formula</a>
-     * @return distance in meters.
-     */
-    fun calculateDistance(from: Pair<Double, Double>, to: Pair<Double, Double>): Double {
-        return calculateDistance(from, to)
-    }
-
-    /**
      * Calculates the total distance of latitude-longitude polyline in meters.
      *
      * @param polyline latitude-longitude pairs describing a polyline.
