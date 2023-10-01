@@ -12,5 +12,6 @@ data class RideDto(
     val finishAddress: String?,
     val startDateTime: LocalDateTime,
     val finishDateTime: LocalDateTime,
-    val route: Route
+    val route: Route,
+    val averageSpeed: Double
 )
