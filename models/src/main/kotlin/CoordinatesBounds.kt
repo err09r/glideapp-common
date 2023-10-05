@@ -12,8 +12,8 @@ class CoordinatesBounds {
     val northeast: Coordinates
 
     constructor(southwest: Coordinates, northeast: Coordinates) {
-        val neLat = northeast.latitude
         val swLat = southwest.latitude
+        val neLat = northeast.latitude
 
         require(neLat >= swLat) {
             "Southern latitude exceeds northern latitude ($swLat > $neLat)"
@@ -30,18 +30,8 @@ class CoordinatesBounds {
 
     val center: Coordinates
         get() {
-            val swLat = this.southwest.latitude
-            val swLon = this.southwest.longitude
-            val neLat = this.northeast.latitude
-            val neLon = this.northeast.longitude
-
-            val centerLatitude = (swLat + neLat) / 2.0
-            val centerLongitude = if (swLon <= neLon) {
-                (neLon + swLon) / 2.0
-            } else {
-                (neLon + 360.0 + swLon) / 2.0
-            }
-
+            val centerLatitude = (southwest.latitude + northeast.latitude) / 2.0
+            val centerLongitude = (southwest.longitude + northeast.longitude) / 2.0
             return Coordinates(latitude = centerLatitude, longitude = centerLongitude)
         }
 
@@ -49,10 +39,10 @@ class CoordinatesBounds {
         val pointLat = point.latitude
         return this.southwest.latitude <= pointLat
                 && pointLat <= this.northeast.latitude
-                && isValueInRange(point.longitude)
+                && isLongitudeWithinBounds(point.longitude)
     }
 
-    private fun isValueInRange(longitude: Double): Boolean {
+    private fun isLongitudeWithinBounds(longitude: Double): Boolean {
         val swLong = this.southwest.longitude
         val neLong = this.northeast.longitude
         return if (swLong <= neLong) {
@@ -89,8 +79,8 @@ val CoordinatesBounds.Companion.Empty
     get() = CoordinatesBounds(southwest = Coordinates(0.0, 0.0), northeast = Coordinates(0.0, 0.0))
 
 fun List<Coordinates>.toCoordinatesBounds(): CoordinatesBounds {
-    val topmostLatitude = this.minOf { it.latitude }
-    val bottommostLatitude = this.maxOf { it.latitude }
+    val topmostLatitude = this.maxOf { it.latitude }
+    val bottommostLatitude = this.minOf { it.latitude }
     val leftmostLongitude = this.minOf { it.longitude }
     val rightmostLongitude = this.maxOf { it.longitude }
 
