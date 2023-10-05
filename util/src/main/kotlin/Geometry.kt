@@ -40,7 +40,7 @@ object Geometry {
     }
 
     /**
-     * Calculates the total distance of latitude-longitude polyline in meters.
+     * Calculates the total distance of latitude-longitude polyline.
      *
      * @param polyline latitude-longitude pairs describing a polyline.
      * @see <a href="https://en.wikipedia.org/wiki/Haversine_formula">Haversine formula</a>
