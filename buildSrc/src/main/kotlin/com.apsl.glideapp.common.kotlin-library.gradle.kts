@@ -6,7 +6,7 @@ plugins {
 }
 
 group = Config.group
-version = Config.version
+version = project.property("artifactVersion").toString()
 
 java {
     withSourcesJar()
