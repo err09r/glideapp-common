@@ -27,21 +27,34 @@ fun <T> Iterable<T>.dropEvery(n: Int): List<T> {
     return list
 }
 
-// Create docs
+/**
+ * Returns a compressed list containing [n] elements.
+ * The first and last element of list are always added.
+ * The remaining elements are selected randomly.
+ *
+ * @param n size of compressed list.
+ * @throws IllegalArgumentException if [n] is not between 0 and original list size.
+ */
 fun <T> List<T>.compress(n: Int): List<T> {
-    require(n in 0..this.size) { "Requested n value: $n is not between 0 and 1." }
+    require(n in 0..this.size) { "Requested n value: $n is not between 0 and list size." }
     if (this.size <= 3) {
         return this
     }
-    val rate = 1f / (n - 2)
-    val list = ArrayList<T>()
-    list.add(this[0])
-
-    this
-        .subList(fromIndex = 1, toIndex = this.lastIndex - 1)
-        .chunked(size = ((this.size - 2) * rate).roundToInt())
-        .forEach { list.add(it.random()) }
-
-    list.add(this[this.lastIndex])
-    return list
+    return when (n) {
+        0 -> emptyList()
+        1 -> this.take(1)
+        2 -> listOf(this.first(), this.last())
+        this.size -> this
+        else -> {
+            val ratio = 1f / (n - 2)
+            val list = ArrayList<T>(n)
+            list.add(this.first())
+            this
+                .subList(fromIndex = 1, toIndex = this.lastIndex - 1)
+                .chunked(size = ((this.size - 2) * ratio).roundToInt())
+                .forEach { list.add(it.random()) }
+            list.add(this.last())
+            return list
+        }
+    }
 }
