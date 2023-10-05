@@ -27,13 +27,21 @@ fun <T> Iterable<T>.dropEvery(n: Int): List<T> {
     return list
 }
 
-/**
- * Returns a compressed list containing [n] elements.
- *
- * @param n size of compressed list
- * @throws IllegalArgumentException if [n] is negative.
- */
+// Create docs
 fun <T> List<T>.compress(n: Int): List<T> {
-    require(n >= 0) { "Requested element count $n is less than zero." }
-    return this.dropEvery(n = ((this.size.toFloat() / n)).roundToInt())
+    require(n in 0..this.size) { "Requested n value: $n is not between 0 and 1." }
+    if (this.size <= 3) {
+        return this
+    }
+    val rate = 1f / (n - 2)
+    val list = ArrayList<T>()
+    list.add(this[0])
+
+    this
+        .subList(fromIndex = 1, toIndex = this.lastIndex - 1)
+        .chunked(size = ((this.size - 2) * rate).roundToInt())
+        .forEach { list.add(it.random()) }
+
+    list.add(this[this.lastIndex])
+    return list
 }
