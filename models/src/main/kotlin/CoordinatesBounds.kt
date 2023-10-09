@@ -36,20 +36,8 @@ class CoordinatesBounds {
         }
 
     fun contains(point: Coordinates): Boolean {
-        val pointLat = point.latitude
-        return this.southwest.latitude <= pointLat
-                && pointLat <= this.northeast.latitude
-                && isLongitudeWithinBounds(point.longitude)
-    }
-
-    private fun isLongitudeWithinBounds(longitude: Double): Boolean {
-        val swLong = this.southwest.longitude
-        val neLong = this.northeast.longitude
-        return if (swLong <= neLong) {
-            longitude in swLong..neLong
-        } else {
-            swLong <= longitude || longitude <= neLong
-        }
+        return point.latitude in this.southwest.latitude..this.northeast.latitude &&
+                point.longitude in this.southwest.longitude..this.northeast.longitude
     }
 
     override fun equals(other: Any?): Boolean {
