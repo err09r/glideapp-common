@@ -17,15 +17,23 @@ jobs:
     steps:
         - uses: actions/checkout@v4.1.0
 
-        - name: Get artifact version
+        - name: Set VERSION environment variable
           run: echo "VERSION=$(cat gradle.properties | grep artifactVersion | cut -d "=" -f2)" >> $GITHUB_ENV
+
+        - name: Set JITPACK_ARTIFACT_VERSION environment variable
+          run: echo "JITPACK_ARTIFACT_VERSION=https://jitpack.io/#${{ github.repository }}/${{ env.VERSION }}" >> $GITHUB_ENV
             
         - name: Create GitHub release
           uses: ncipollo/release-action@v1.13.0
           with:
             name: v${{ env.VERSION }}
             tag: ${{ env.VERSION }}
+            body: "## JitPack Release Link\n* ${{ env.JITPACK_ARTIFACT_VERSION }}\n"
             generateReleaseNotes: true
 
         - name: Run build on JitPack
-          run: curl https://jitpack.io/com/github/${{ github.repository }}/${{ env.VERSION }}
+          # Send request multiple times to ensure that build has been triggered.
+          run: |
+            curl ${{ env.JITPACK_ARTIFACT_VERSION }}
+            sleep 10
+            curl ${{ env.JITPACK_ARTIFACT_VERSION }}
