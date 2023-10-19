@@ -1,4 +1,4 @@
-@file:Suppress("SameParameterValue")
+@file:Suppress("Unused", "SameParameterValue")
 
 package com.apsl.glideapp.common.dto
 
@@ -13,7 +13,7 @@ sealed interface RideEventDto {
     data class Started(val rideId: String, val dateTime: LocalDateTime) : RideEventDto
 
     @Serializable
-    data class Restored(val rideId: String, val dateTime: LocalDateTime) : RideEventDto
+    data class Restored(val rideId: String, val startDateTime: LocalDateTime) : RideEventDto
 
     @Serializable
     data class RouteUpdated(val currentRoute: List<Coordinates>) : RideEventDto
