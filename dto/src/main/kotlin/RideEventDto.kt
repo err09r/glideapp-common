@@ -10,10 +10,10 @@ import kotlinx.serialization.Serializable
 sealed interface RideEventDto {
 
     @Serializable
-    data class Started(val rideId: String, val dateTime: LocalDateTime) : RideEventDto
+    data class Started(val rideId: String, val vehicle: VehicleDto, val dateTime: LocalDateTime) : RideEventDto
 
     @Serializable
-    data class Restored(val rideId: String, val startDateTime: LocalDateTime) : RideEventDto
+    data class Restored(val rideId: String, val vehicle: VehicleDto, val startDateTime: LocalDateTime) : RideEventDto
 
     @Serializable
     data class RouteUpdated(val currentRoute: List<Coordinates>) : RideEventDto
