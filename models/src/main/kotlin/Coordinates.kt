@@ -51,4 +51,4 @@ class Coordinates {
     }
 }
 
-fun List<Coordinates>.asPairs(): Array<Pair<Double, Double>> = this.map(Coordinates::asPair).toTypedArray()
+fun List<Coordinates>.asPairs(): List<Pair<Double, Double>> = this.map(Coordinates::asPair)
