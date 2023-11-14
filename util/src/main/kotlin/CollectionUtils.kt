@@ -31,7 +31,7 @@ fun <T> Iterable<T>.dropEvery(n: Int): List<T> {
  */
 fun <T> List<T>.compress(n: Int): List<T> {
     require(n >= 0) { "Requested n value: $n is less than zero." }
-    if (this.size < 4) {
+    if (this.size <= 3) {
         return this
     }
     return when (n) {

@@ -12,15 +12,11 @@ class CoordinatesBounds {
     val northeast: Coordinates
 
     constructor(southwest: Coordinates, northeast: Coordinates) {
-        val (swLat, swLon) = southwest
-        val (neLat, neLon) = northeast
+        val swLat = southwest.latitude
+        val neLat = northeast.latitude
 
         require(neLat >= swLat) {
             "Southern latitude exceeds northern latitude ($swLat > $neLat)"
-        }
-
-        require(neLon >= swLon) {
-            "Southern longitude exceeds northern longitude ($swLon > $neLon)"
         }
 
         this.southwest = southwest

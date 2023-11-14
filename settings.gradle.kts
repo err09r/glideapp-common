@@ -6,15 +6,12 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
-
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositoriesMode = RepositoriesMode.FAIL_ON_PROJECT_REPOS
     repositories {
         mavenCentral()
         maven("https://jitpack.io")
     }
 }
-
 rootProject.name = "glideapp-common"
-
 include("dto", "models", "util")
