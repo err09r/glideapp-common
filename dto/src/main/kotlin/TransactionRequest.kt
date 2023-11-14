@@ -1,3 +1,5 @@
+@file:Suppress("Unused")
+
 package com.apsl.glideapp.common.dto
 
 import com.apsl.glideapp.common.models.TransactionType
