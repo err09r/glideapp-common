@@ -15,6 +15,9 @@ value class ZoneBorder(val points: List<Coordinates>) {
         get() = points.toCoordinatesBounds().center
 
     fun contains(point: Coordinates): Boolean {
-        return Geometry.isInsidePolygon(point = point.asPair(), vertices = points.asPairs())
+        return Geometry.isInsidePolygon(
+            vertices = points.asPairs(),
+            point = point.asPair()
+        )
     }
 }
