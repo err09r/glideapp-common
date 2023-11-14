@@ -17,7 +17,7 @@ class Coordinates {
         this.longitude = if (!(longitude < -180.0) && longitude < 180.0) {
             longitude
         } else {
-            ((longitude + -180.0) % 360.0 + 360.0) % 360.0 + -180.0
+            ((longitude - 180.0) % 360.0 + 360.0) % 360.0 - 180.0
         }
     }
 
@@ -51,4 +51,4 @@ class Coordinates {
     }
 }
 
-fun List<Coordinates>.asPairs(): Array<Pair<Double, Double>> = this.map(Coordinates::asPair).toTypedArray()
+fun List<Coordinates>.asPairs(): List<Pair<Double, Double>> = this.map(Coordinates::asPair)

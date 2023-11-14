@@ -1,5 +1,6 @@
 plugins {
     id("com.apsl.glideapp.common.kotlin-publish")
+    id("com.apsl.glideapp.common.kotlin-test")
 }
 
 dependencies {
