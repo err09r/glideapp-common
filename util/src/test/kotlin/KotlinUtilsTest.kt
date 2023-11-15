@@ -3,6 +3,7 @@ import com.apsl.glideapp.common.util.format
 import java.util.Locale
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Nested
 
 class KotlinUtilsTest {
@@ -38,6 +39,11 @@ class KotlinUtilsTest {
     @Nested
     inner class DoubleFormatTest {
 
+        @BeforeEach
+        fun setUp() {
+            Locale.setDefault(Locale.US)
+        }
+
         @Test
         fun `Check if double is formatted correctly`() {
             val double = 123.45
@@ -48,6 +54,7 @@ class KotlinUtilsTest {
 
         @Test
         fun `Check if double is formatted correctly with less 'digits'`() {
+            Locale.setDefault(Locale.US)
             val double = 123.45
             val expected = "123.5"
             val actual = double.format(1)
@@ -82,13 +89,12 @@ class KotlinUtilsTest {
         fun `Check if double is formatted correctly depending on default locale`() {
             val double = 123.45
 
-            Locale.setDefault(Locale.FRANCE)
-            var expected = "123,45"
+            var expected = "123.45"
             var actual = double.format(2)
             assertEquals(expected = expected, actual = actual)
 
-            Locale.setDefault(Locale.US)
-            expected = "123.45"
+            Locale.setDefault(Locale.FRANCE)
+            expected = "123,45"
             actual = double.format(2)
             assertEquals(expected = expected, actual = actual)
         }
