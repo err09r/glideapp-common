@@ -2,7 +2,7 @@
 
 package com.apsl.glideapp.common.dto
 
-import com.apsl.glideapp.common.models.Coordinates
+import com.apsl.glideapp.common.models.Route
 import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.Serializable
 
@@ -16,7 +16,7 @@ sealed interface RideEventDto {
     data class Restored(val rideId: String, val vehicle: VehicleDto, val startDateTime: LocalDateTime) : RideEventDto
 
     @Serializable
-    data class RouteUpdated(val currentRoute: List<Coordinates>) : RideEventDto
+    data class RouteUpdated(val currentRoute: Route) : RideEventDto
 
     @Serializable
     sealed class Error(val message: String?) : RideEventDto {
