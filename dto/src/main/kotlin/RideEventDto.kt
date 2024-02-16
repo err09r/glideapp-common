@@ -23,6 +23,12 @@ sealed interface RideEventDto {
 
         @Serializable
         data object UserInsideNoParkingZone : Error("User is inside no-parking zone")
+
+        @Serializable
+        data object UserTooFarFromVehicle : Error("User is too far from vehicle")
+
+        @Serializable
+        data object NotEnoughFunds : Error("User does not have enough funds to start a ride")
     }
 
     @Serializable
