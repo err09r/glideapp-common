@@ -32,7 +32,7 @@ sealed interface RideEventDto {
     }
 
     @Serializable
-    data object Finished : RideEventDto
+    data class Finished(val distance: Double, val averageSpeed: Double) : RideEventDto
 
     @Serializable
     data class SessionCancelled(val message: String? = null) : RideEventDto
